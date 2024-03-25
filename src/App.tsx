@@ -1,109 +1,94 @@
 import './App.css'
+import { Button, Input, Modal } from "antd"
+import AppHeader from './components/AppHeader';
+import Menus from './components/Menus';
+import { FC, useState } from "react";
+import SizeCup from './components/SizeCup';
 
-function App() {
-  return (
-    <>
-      <header className='app-header'>
-        <div>
-          <img className='app-header-logo' src='/images/logo.jpg' />
-          <div className='square'></div>
-          <img className='basket-header-logo' src='/images/basket.png' />
-
-        </div>
-      </header>
-      <body>
-        <div className='container'>
-          <div className='image'>
-            <img src='/images/soymilk.png' alt='นํ้าเต้าหู้' />
-            <p>นํ้าเต้าหู้</p>
-          </div>
-          <div className='image'>
-            <img  src='/images/lamyai.png' alt='นํ้าลำไย' />
-            <p>นํ้าลำไย</p>
-          </div>
-          <div className='image'>
-            <img  src='/images/jubleag.png' alt='นํ้าจับเลี้ยง' />
-            <p>นํ้าจับเลี้ยง</p>
-          </div>
-          <div className='image'>
-          <img src='/images/milk.png' alt='นมสด' />
-            <p>นมสด</p>
-          </div>
-          <div className='image'>
-            <img src='/images/namking.png' alt='นํ้าขิง' />
-            <p>นํ้าขิง</p>
-          </div>
-        </div>
-          <h2 className='header-size'>โปรดเลือกขนาด</h2>
-        <div className='size-cup'>
-        <button className='button1'>เล็ก<br/>30</button>
-        <button className='button2'>กลาง<br/>40</button>
-        <button className='button3'>ใหญ่<br/>55</button>
-        <button className='button4'>มโหฬาร<br/>70</button>
-        </div>
+    const App:FC = () => {
+        const [menuSelected, setMenuSelected] = useState(null);
+        const [size, setSize] = useState<string>('');
+        const [type, setType] = useState<string>('');
         
-        <h2 className='header-type'>ชนิดเครื่องดื่ม</h2>
-        <div className='typeDrink'>
-        <button className='button5'>ร้อน</button>
-        <button className='button6'>เย็น</button>
+        function selectMenu(menu:any){
+          setMenuSelected(menu);
+        }
+        const handleSizeChange = (size: string) => {
+          setSize(size);
+        };
+      
+        const handleTypeChange = (type: string) => {
+          setType(type);
+        };
+
+        function onSubmit(event:any){
+            event.preventDefault();
+        }
+
+  return (
+    <div>
+      <div>
+        <AppHeader />
+      </div>
+      
+        <div className='container'>
+          <Menus txt="นํ้าเต้าหู้" url="/images/soymilk.png"  selectDrink={selectMenu}/>
+          <Menus txt="นํ้าลำไย" url="/images/lamyai.png"  selectDrink={selectMenu}/>
+          <Menus txt="นํ้าจับเลี้ยง" url="/images/่ีิjubleag.png" selectDrink={selectMenu}/>
+          <Menus txt="นมสด" url="'/images/milk.png'" selectDrink={selectMenu}/>
+          <Menus txt="นํ้าขิง" url="/images/namking.png" selectDrink={selectMenu}/>
+{/* 
+          <Menus txt="นํ้าลำไย" url="/images/lamyai.png" onClick={() => handleMenuSelect('นํ้าลำไย')}/>
+          <Menus txt="นํ้าจับเลี้ยง" url="/images/่ีิjubleag.png" onClick={() => handleMenuSelect('นํ้าจับเลี้ยง')}/>
+          <Menus txt="นมสด" url="'/images/milk.png'" onClick={() => handleMenuSelect('นมสด')}/>
+          <Menus txt="นํ้าขิง" url="/images/namking.png" onClick={() => handleMenuSelect('นํ้าขิง')}/> */}
         </div>
-        <h2 className='header-Topping'>โควต้าท็อปปิ้ง  อย่าง</h2>
+        <p>{menuSelected}</p>
+
+        <div className='size-cup'>
+          <p className='header-size'>โปรดเลือกขนาด</p>
+          <form />
+          <SizeCup size="เล็ก" price="30" onClick={()=> handleSizeChange("30")} />
+          <SizeCup size="กลาง" price="40" onClick={()=> handleSizeChange("40")} />
+          <SizeCup size="ใหญ่" price="55" onClick={()=> handleSizeChange("55")} />
+          <SizeCup size="มโหฬาร" price="70" onClick={()=> handleSizeChange("70")} />
+        </div>
+
+        <div className='typeDrink'>
+        <p className='header-type'>ชนิดเครื่องดื่ม</p>
+          <button className='button5' onClick={()=> handleTypeChange("Hot")} >ร้อน</button>
+          <button className='button6' onClick={()=> handleTypeChange("Cool")} >เย็น</button>
+        </div>
+
+
         <div className='container1'>
-          {/* <div className='topping'>
-              <img src ='images/ORDER - 12.png' alt='ปาท่องโก๋'/>
-          </div>
-          <div className='topping'>
-              <img src ='images/ORDER - 14.png' alt='ปาท่องโก๋'/>
-          </div>
-          <div className='topping'>
-              <img src ='images/toulhuae.png' alt='ปาท่องโก๋'/>
-          </div>
-          <div className='topping'>
-              <img src ='images/ORDER - 18.png'alt='ปาท่องโก๋'/>
-          </div>
-          <div className='topping'>
-              <img src ='images/ORDER - 20.png' alt='ปาท่องโก๋'/>
-          </div>
-          <br/>
-          <div className='topping'>
-              <img src ='images/ORDER - 13.png'alt='ปาท่องโก๋'/>
-          </div>
-          <div className='topping'>
-              <img src ='images/showkuy.png' alt='ปาท่องโก๋'/>
-          </div >
-          <div className='topping'>
-              <img src ='images/maklung.png' alt='ปาท่องโก๋'/>
-          </div>
-          <div className='topping'>
-              <img src ='images/ORDER - 19.png'alt='ปาท่องโก๋'/>
-          </div>
-          <div className='topping'>
-              <img src ='images/ORDER - 21.png' alt='ปาท่องโก๋'/>
-          </div> */}
+        <p className='header-Topping'>โควต้าท็อปปิ้ง</p>
           <table>
-              <tr>
-                <td className='topping'> <img src ='images/ORDER - 12.png' /><br/><p>ปาท่องโก๋</p> </td>
-                <td className='topping'><img src ='images/ORDER - 14.png'/><br/><p>แปะก๊วย</p></td>
-                <td className='topping'><img src ='images/toulhuae.png' /><br/><p>เต้าฮวย</p></td>
-                <td className='topping'><img src ='images/ORDER - 18.png'/><br/><p>รากบัว</p></td>
-                <td className='topping'> <img src ='images/ORDER - 20.png'/><br/><p>ผงไมโล</p></td>
-              </tr>
-              <tr>
-                  <td className='topping'><img src ='images/ORDER - 13.png'/><br/><p>รวมถั่ว</p></td>
-                  <td className='topping'> <img src ='images/showkuy.png'/><br/><p>เฉาก๊วย</p></td>
-                  <td className='topping'>  <img src ='images/maklung.png'/><br/><p>เม็ดแมงลัก</p></td>
-                  <td className='topping'>  <img src ='images/ORDER - 19.png'/><br/><p>ไขมุก</p></td>
-                  <td className='topping'> <img src ='images/ORDER - 21.png'/><br/><p>ลูกชิด</p></td>
-              </tr>
+            <tbody>
+            <tr>
+              <td className='topping'> <img src='images/ORDER - 12.png' /><br /><p>ปาท่องโก๋</p> </td>
+              <td className='topping'><img src='images/ORDER - 14.png' /><br /><p>แปะก๊วย</p></td>
+              <td className='topping'><img src='images/toulhuae.png' /><br /><p>เต้าฮวย</p></td>
+              <td className='topping'><img src='images/ORDER - 18.png' /><br /><p>รากบัว</p></td>
+              <td className='topping'> <img src='images/ORDER - 20.png' /><br /><p>ผงไมโล</p></td>
+            </tr>
+            <tr>
+              <td className='topping'><img src='images/ORDER - 13.png' /><br /><p>รวมถั่ว</p></td>
+              <td className='topping'> <img src='images/showkuy.png' /><br /><p>เฉาก๊วย</p></td>
+              <td className='topping'>  <img src='images/maklung.png' /><br /><p>เม็ดแมงลัก</p></td>
+              <td className='topping'>  <img src='images/ORDER - 19.png' /><br /><p>ไขมุก</p></td>
+              <td className='topping'> <img src='images/ORDER - 21.png' /><br /><p>ลูกชิด</p></td>
+            </tr>
+            </tbody>
           </table>
         </div>
+
         <div className='bill-image'>
           <p>กดด้านล่างเพื่อเพิ่มลงตะกร้า</p>
-            <img src='images/bill.png'/>
+          <button type="submit"><img src='images/bill.png' /></button>
         </div>
-
-      </body>
-    </>
+      
+    </div>
   );
 }
 
